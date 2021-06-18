@@ -14,14 +14,42 @@
 
 {crmScope extensionKey='de.systopia.eventcheckin'}
 
-  <div>
-    <span>{$form.token_timeout.label}&nbsp;{help id="id-token-timeout" title=$form.token_timeout.label}</div>
-    <span>{$form.token_timeout.html}</span>
+  <h3>{ts}Tokens Settings{/ts}</h3>
+  <div class="crm-section">
+    <div class="label">{$form.token_timeout.label}&nbsp;{help id="id-token-timeout" title=$form.token_timeout.label}</div>
+    <div class="content">{$form.token_timeout.html}</div>
+    <div class="clear"></div>
   </div>
 
-  <div>
-    <span>{$form.external_link.label}&nbsp;{help id="id-external-link" title=$form.external_link.label}</div>
-    <span>{$form.external_link.html}</span>
+  <div class="crm-section">
+    <div class="label">{$form.external_link.label}&nbsp;{help id="id-external-link" title=$form.external_link.label}</div>
+    <div class="content">{$form.external_link.html}</div>
+    <div class="clear"></div>
+  </div>
+
+  <h3>{ts}Check-In Settings{/ts}</h3>
+  <div class="crm-section">
+    <div class="label">{$form.checkin_permissions.label}&nbsp;{help id="id-checkin-permissions" title=$form.checkin_permissions.label}</div>
+    <div class="content">{$form.checkin_permissions.html}</div>
+    <div class="clear"></div>
+  </div>
+
+  <div class="crm-section">
+    <div class="label">{$form.checkin_status_list.label}&nbsp;{help id="id-checkin-status-list" title=$form.checkin_status_list.label}</div>
+    <div class="content">{$form.checkin_status_list.html}</div>
+    <div class="clear"></div>
+  </div>
+
+  <div class="crm-section">
+    <div class="label">{$form.checked_in_status_list.label}&nbsp;{help id="id-checked-in-status-list" title=$form.checked_in_status_list.label}</div>
+    <div class="content">{$form.checked_in_status_list.html}</div>
+    <div class="clear"></div>
+  </div>
+
+  <div class="crm-section">
+    <div class="label">{$form.verification_fields.label}&nbsp;{help id="id-verification-fields" title=$form.verification_fields.label}</div>
+    <div class="content">{$form.verification_fields.html}</div>
+    <div class="clear"></div>
   </div>
 
   <div class="crm-submit-buttons">
