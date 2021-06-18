@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<menu>
+  <!-- Settings -->
+  <item>
+    <path>civicrm/admin/eventcheckin/settings</path>
+    <page_callback>CRM_Eventcheckin_Form_Settings</page_callback>
+    <title>Event Check-In Configuration</title>
+    <desc>Allows you to generate and send event check-in links, including QR codes</desc>
+    <access_arguments>administer CiviCRM</access_arguments>
+    <adminGroup>Communications</adminGroup>
+    <icon>admin/small/rela_type.png</icon>
+  </item>
+</menu>

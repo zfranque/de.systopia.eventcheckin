@@ -34,7 +34,7 @@ class CRM_Eventcheckin_CheckinCode
         return CRM_Remotetools_SecureToken::generateEntityToken(
             'Participant',
             $participantId,
-            null,
+            self::getExpirationDate($participantId),
             self::PARTICIPANT_CODE_USAGE
         );
     }
@@ -71,5 +71,17 @@ class CRM_Eventcheckin_CheckinCode
     {
         // TODO: implement for external links
         return CRM_Utils_System::url('civicrm/event/checkin?token=' . $token);
+    }
+
+    /**
+     * Calculate the expiry date (if any) based on the settings
+     *
+     * @param integer $participant_id
+     *   participant ID
+     */
+    public static function getExpirationDate($participant_id)
+    {
+        // todo: here we could implement settings like '1 hour after the event started' based on the participant id
+        return Civi::settings()->get('event_checkin_timeout');
     }
 }
