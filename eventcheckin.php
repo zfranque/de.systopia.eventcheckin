@@ -14,9 +14,13 @@
 +--------------------------------------------------------*/
 
 
+require_once __DIR__ . '/vendor/autoload.php';
 require_once 'eventcheckin.civix.php';
+
 // phpcs:disable
+use Civi\RemoteToolsDispatcher;
 use CRM_Eventcheckin_ExtensionUtil as E;
+
 // phpcs:enable
 
 /**
@@ -24,8 +28,21 @@ use CRM_Eventcheckin_ExtensionUtil as E;
  *
  * @link https://docs.civicrm.org/dev/en/latest/hooks/hook_civicrm_config/
  */
-function eventcheckin_civicrm_config(&$config) {
-  _eventcheckin_civix_civicrm_config($config);
+function eventcheckin_civicrm_config(&$config)
+{
+    _eventcheckin_civix_civicrm_config($config);
+    // register events (with our own wrapper to avoid duplicate registrations)
+    $dispatcher = new RemoteToolsDispatcher();
+
+    // EVENTMESSAGES.TOKENS
+    $dispatcher->addUniqueListener(
+        'civi.eventmessages.tokens',
+        ['CRM_Eventcheckin_Tokens', 'addTokens']
+    );
+    $dispatcher->addUniqueListener(
+        'civi.eventmessages.tokenlist',
+        ['CRM_Eventcheckin_Tokens', 'listTokens']
+    );
 }
 
 /**
@@ -33,8 +50,9 @@ function eventcheckin_civicrm_config(&$config) {
  *
  * @link https://docs.civicrm.org/dev/en/latest/hooks/hook_civicrm_xmlMenu
  */
-function eventcheckin_civicrm_xmlMenu(&$files) {
-  _eventcheckin_civix_civicrm_xmlMenu($files);
+function eventcheckin_civicrm_xmlMenu(&$files)
+{
+    _eventcheckin_civix_civicrm_xmlMenu($files);
 }
 
 /**
@@ -42,8 +60,9 @@ function eventcheckin_civicrm_xmlMenu(&$files) {
  *
  * @link https://docs.civicrm.org/dev/en/latest/hooks/hook_civicrm_install
  */
-function eventcheckin_civicrm_install() {
-  _eventcheckin_civix_civicrm_install();
+function eventcheckin_civicrm_install()
+{
+    _eventcheckin_civix_civicrm_install();
 }
 
 /**
@@ -51,8 +70,9 @@ function eventcheckin_civicrm_install() {
  *
  * @link https://docs.civicrm.org/dev/en/latest/hooks/hook_civicrm_postInstall
  */
-function eventcheckin_civicrm_postInstall() {
-  _eventcheckin_civix_civicrm_postInstall();
+function eventcheckin_civicrm_postInstall()
+{
+    _eventcheckin_civix_civicrm_postInstall();
 }
 
 /**
@@ -60,8 +80,9 @@ function eventcheckin_civicrm_postInstall() {
  *
  * @link https://docs.civicrm.org/dev/en/latest/hooks/hook_civicrm_uninstall
  */
-function eventcheckin_civicrm_uninstall() {
-  _eventcheckin_civix_civicrm_uninstall();
+function eventcheckin_civicrm_uninstall()
+{
+    _eventcheckin_civix_civicrm_uninstall();
 }
 
 /**
@@ -69,8 +90,9 @@ function eventcheckin_civicrm_uninstall() {
  *
  * @link https://docs.civicrm.org/dev/en/latest/hooks/hook_civicrm_enable
  */
-function eventcheckin_civicrm_enable() {
-  _eventcheckin_civix_civicrm_enable();
+function eventcheckin_civicrm_enable()
+{
+    _eventcheckin_civix_civicrm_enable();
 }
 
 /**
@@ -78,8 +100,9 @@ function eventcheckin_civicrm_enable() {
  *
  * @link https://docs.civicrm.org/dev/en/latest/hooks/hook_civicrm_disable
  */
-function eventcheckin_civicrm_disable() {
-  _eventcheckin_civix_civicrm_disable();
+function eventcheckin_civicrm_disable()
+{
+    _eventcheckin_civix_civicrm_disable();
 }
 
 /**
@@ -87,8 +110,9 @@ function eventcheckin_civicrm_disable() {
  *
  * @link https://docs.civicrm.org/dev/en/latest/hooks/hook_civicrm_upgrade
  */
-function eventcheckin_civicrm_upgrade($op, CRM_Queue_Queue $queue = NULL) {
-  return _eventcheckin_civix_civicrm_upgrade($op, $queue);
+function eventcheckin_civicrm_upgrade($op, CRM_Queue_Queue $queue = null)
+{
+    return _eventcheckin_civix_civicrm_upgrade($op, $queue);
 }
 
 /**
@@ -99,8 +123,9 @@ function eventcheckin_civicrm_upgrade($op, CRM_Queue_Queue $queue = NULL) {
  *
  * @link https://docs.civicrm.org/dev/en/latest/hooks/hook_civicrm_managed
  */
-function eventcheckin_civicrm_managed(&$entities) {
-  _eventcheckin_civix_civicrm_managed($entities);
+function eventcheckin_civicrm_managed(&$entities)
+{
+    _eventcheckin_civix_civicrm_managed($entities);
 }
 
 /**
@@ -112,8 +137,9 @@ function eventcheckin_civicrm_managed(&$entities) {
  *
  * @link https://docs.civicrm.org/dev/en/latest/hooks/hook_civicrm_caseTypes
  */
-function eventcheckin_civicrm_caseTypes(&$caseTypes) {
-  _eventcheckin_civix_civicrm_caseTypes($caseTypes);
+function eventcheckin_civicrm_caseTypes(&$caseTypes)
+{
+    _eventcheckin_civix_civicrm_caseTypes($caseTypes);
 }
 
 /**
@@ -126,8 +152,9 @@ function eventcheckin_civicrm_caseTypes(&$caseTypes) {
  *
  * @link https://docs.civicrm.org/dev/en/latest/hooks/hook_civicrm_angularModules
  */
-function eventcheckin_civicrm_angularModules(&$angularModules) {
-  _eventcheckin_civix_civicrm_angularModules($angularModules);
+function eventcheckin_civicrm_angularModules(&$angularModules)
+{
+    _eventcheckin_civix_civicrm_angularModules($angularModules);
 }
 
 /**
@@ -135,8 +162,9 @@ function eventcheckin_civicrm_angularModules(&$angularModules) {
  *
  * @link https://docs.civicrm.org/dev/en/latest/hooks/hook_civicrm_alterSettingsFolders
  */
-function eventcheckin_civicrm_alterSettingsFolders(&$metaDataFolders = NULL) {
-  _eventcheckin_civix_civicrm_alterSettingsFolders($metaDataFolders);
+function eventcheckin_civicrm_alterSettingsFolders(&$metaDataFolders = null)
+{
+    _eventcheckin_civix_civicrm_alterSettingsFolders($metaDataFolders);
 }
 
 /**
@@ -146,15 +174,17 @@ function eventcheckin_civicrm_alterSettingsFolders(&$metaDataFolders = NULL) {
  *
  * @link https://docs.civicrm.org/dev/en/latest/hooks/hook_civicrm_entityTypes
  */
-function eventcheckin_civicrm_entityTypes(&$entityTypes) {
-  _eventcheckin_civix_civicrm_entityTypes($entityTypes);
+function eventcheckin_civicrm_entityTypes(&$entityTypes)
+{
+    _eventcheckin_civix_civicrm_entityTypes($entityTypes);
 }
 
 /**
  * Implements hook_civicrm_themes().
  */
-function eventcheckin_civicrm_themes(&$themes) {
-  _eventcheckin_civix_civicrm_themes($themes);
+function eventcheckin_civicrm_themes(&$themes)
+{
+    _eventcheckin_civix_civicrm_themes($themes);
 }
 
 // --- Functions below this ship commented out. Uncomment as required. ---
