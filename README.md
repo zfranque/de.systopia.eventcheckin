@@ -7,7 +7,8 @@ It also provides an API to allow a remote (more secure) form to do this.
 
 ## Features
 
-* TODO
+* Generates check-in links for participants (currently EventMessages only)
+* Generates check-in link QR codes for participants (currently EventMessages only)
 
 ## Requirements
 
