@@ -28,10 +28,9 @@
   </div>
 
   <h3>{ts}Check-In Settings{/ts}</h3>
-  <div class="crm-section">
-    <div class="label">{$form.checkin_permissions.label}&nbsp;{help id="id-checkin-permissions" title=$form.checkin_permissions.label}</div>
-    <div class="content">{$form.checkin_permissions.html}</div>
-    <div class="clear"></div>
+  <div id="help">
+    {ts}In order to check in other contacts, your user has to have the "Check-In Event Participants" (<code>event checkin</code>) permission.{/ts}
+    {ts}If you're using the remote check-in feature, the API user has to have the "RemoteContacts: Check-In Event Participants" (<code>remote event checkin</code>) permission, and the user contact identified by the <code>remote_contact_id</code> must have the "RemoteEvent Check-In User" role.{/ts}
   </div>
 
   <div class="crm-section">

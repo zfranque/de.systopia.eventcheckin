@@ -1,0 +1,16 @@
+{
+  "_lookup": ["name"],
+  "name": "remote_contact_roles",
+  "_values": [
+    {
+      "_lookup": ["name"],
+      "_translate": ["label"],
+      "name": "remote-event-check-in",
+      "label": "RemoteEvent Check-In User",
+      "description": "Contact is allowed to check-in participants",
+      "filter": "0",
+      "is_reserved": "1",
+      "is_active": "1"
+    }
+  ]
+}

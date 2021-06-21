@@ -51,30 +51,6 @@ class CRM_Eventcheckin_Form_Settings extends CRM_Core_Form
         // CHECK-IN SETTINGS
         $this->add(
             'select',
-            'checkin_permissions',
-            E::ts("Permission(s) Required"),
-            $this->getPermissionList(),
-            false,
-            [
-                'class' => 'crm-select2 huge',
-                'multiple' => 'multiple',
-                'placeholder' => E::ts("disabled"),
-            ]
-        );
-        $this->add(
-            'select',
-            'remote_checkin_permissions',
-            E::ts("Remote Permission(s) Required"),
-            $this->getRemotePermissionList(),
-            false,
-            [
-                'class' => 'crm-select2 huge',
-                'multiple' => 'multiple',
-                'placeholder' => E::ts("disabled"),
-            ]
-        );
-        $this->add(
-            'select',
             'checkin_status_list',
             E::ts("Check-In Possible Status"),
             $this->getParticipantStatusTypes(),
@@ -114,8 +90,6 @@ class CRM_Eventcheckin_Form_Settings extends CRM_Core_Form
         $this->setDefaults([
            'external_link' => Civi::settings()->get('event_checkin_link'),
            'token_timeout' => Civi::settings()->get('event_checkin_timeout'),
-           'checkin_permissions' => Civi::settings()->get('event_checkin_permissions'),
-           'remote_checkin_permissions' => Civi::settings()->get('event_remote_checkin_permissions'),
            'checkin_status_list' => Civi::settings()->get('event_checkin_status_list'),
            'checked_in_status_list' => Civi::settings()->get('event_checked_in_status_list'),
            'verification_fields' => Civi::settings()->get('event_verification_fields'),
@@ -138,8 +112,6 @@ class CRM_Eventcheckin_Form_Settings extends CRM_Core_Form
         $values = $this->exportValues();
         Civi::settings()->set('event_checkin_link', $values['external_link']);
         Civi::settings()->set('event_checkin_timeout', $values['token_timeout']);
-        Civi::settings()->set('event_checkin_permissions', $values['checkin_permissions']);
-        Civi::settings()->set('event_remote_checkin_permissions', $values['remote_checkin_permissions']);
         Civi::settings()->set('event_checkin_status_list', $values['checkin_status_list']);
         Civi::settings()->set('event_checked_in_status_list', $values['checked_in_status_list']);
         Civi::settings()->set('event_verification_fields', $values['verification_fields']);
@@ -165,33 +137,5 @@ class CRM_Eventcheckin_Form_Settings extends CRM_Core_Form
             }
         }
         return $participant_status_list;
-    }
-
-    /**
-     * Return a list of permission key -> label eligible for access control
-     *
-     */
-    protected function getPermissionList()
-    {
-        $permission_list = [];
-        $permissions = CRM_Core_Permission::assembleBasicPermissions(true);
-        foreach ($permissions as $key => $permission_label) {
-            $permission_list[$key] = $permission_label;
-        }
-        return $permission_list;
-    }
-
-    /**
-     * Return a list of permission key -> label eligible for access control
-     *
-     */
-    protected function getRemotePermissionList()
-    {
-        $permission_list = [];
-        $permissions = CRM_Core_Permission::assembleBasicPermissions(true);
-        foreach ($permissions as $key => $permission_label) {
-            $permission_list[$key] = $permission_label;
-        }
-        return $permission_list;
     }
 }

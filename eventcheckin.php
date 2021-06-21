@@ -46,6 +46,22 @@ function eventcheckin_civicrm_config(&$config)
 }
 
 /**
+ * Define custom (Drupal) permissions
+ */
+function eventcheckin_civicrm_permission(&$permissions) {
+    $permissions['event checkin'] = E::ts('Check-In Event Participants');
+    $permissions['remote event checkin'] = E::ts('RemoteContacts: Check-In Event Participants');
+}
+
+/**
+ * Set permissions EventCheckin API
+ */
+function eventcheckin_civicrm_alterAPIPermissions($entity, $action, &$params, &$permissions) {
+    $permissions['event_checkin']['verify']  = ['event checkin', 'remote event checkin'];
+    $permissions['event_checkin']['confirm'] = ['event checkin', 'remote event checkin'];
+}
+
+/**
  * Implements hook_civicrm_xmlMenu().
  *
  * @link https://docs.civicrm.org/dev/en/latest/hooks/hook_civicrm_xmlMenu
