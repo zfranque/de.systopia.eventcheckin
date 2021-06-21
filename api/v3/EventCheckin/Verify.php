@@ -55,10 +55,10 @@ function _civicrm_api3_event_checkin_verify_spec(&$spec)
  */
 function civicrm_api3_event_checkin_verify($params)
 {
-    // 0) @todo remove
-    if ($params['token'] = 'testplease') {
-        $params['token'] = CRM_Remotetools_SecureToken::generateEntityToken('Participant', 1, null, 'checkin');
-    }
+//    // 0) @todo remove
+//    if ($params['token'] = 'testplease') {
+//        $params['token'] = CRM_Remotetools_SecureToken::generateEntityToken('Participant', 1, null, 'checkin');
+//    }
 
     // 1) VERIFY PERMISSION
     if (!CRM_Core_Permission::check('event checkin')) {

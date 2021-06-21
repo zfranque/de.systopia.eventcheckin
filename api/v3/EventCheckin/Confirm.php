@@ -40,6 +40,12 @@ function _civicrm_api3_event_checkin_confirm_spec(&$spec)
         'title'        => E::ts('Event-Check-In Token'),
         'description'  => E::ts('Submit a token to be verified'),
     ];
+    $spec['status_id'] = [
+        'name'         => 'status_id',
+        'api.required' => 0,
+        'title'        => E::ts('Future Participant Status ID'),
+        'description'  => E::ts('Submit a token to be verified'),
+    ];
 }
 
 /**
@@ -53,8 +59,42 @@ function _civicrm_api3_event_checkin_confirm_spec(&$spec)
  */
 function civicrm_api3_event_checkin_confirm($params)
 {
-    // todo: verify API permissions
-    // todo: verify local permissions
-    // todo: validate token
-    // todo: update participant data
+//    // 0) @todo remove
+//    if ($params['token'] = 'testplease') {
+//        $params['token'] = CRM_Remotetools_SecureToken::generateEntityToken('Participant', 1, null, 'checkin');
+//    }
+
+    // 1) VERIFY (might throw an exception)
+    $verification_result = civicrm_api3('EventCheckin', 'verify', $params);
+
+    // 2) (RE-)VALIDATE TOKEN
+    $participant_id = CRM_Remotetools_SecureToken::decodeEntityToken('Participant', $params['token'], 'checkin');
+    if (!$participant_id) {
+        throw new CiviCRM_API3_Exception(E::ts("Invalid Token"));
+    }
+
+    // 3) DETERMINE REQUESTED STATUS
+    $allowed_status_options = $verification_result['checkin_options'];
+    if (empty($params['status_id'])) {
+        if (count($allowed_status_options) > 1) {
+            throw new CiviCRM_API3_Exception(E::ts("You have to provide the status ID if more than two are configured."));
+        } else {
+            $one_status_tuple = array_keys($allowed_status_options);
+            $requested_status_id = (int) reset($one_status_tuple);
+        }
+    } else {
+        $requested_status_id = (int) $params['status_id'];
+    }
+
+    // 4) VERIFY REQUESTED STATUS AND UPDATE PARTICIPANT
+    if (isset($allowed_status_options[$requested_status_id])) {
+        civicrm_api3('Participant', 'create', [
+            'id' => $participant_id,
+            'status_id' => $requested_status_id
+        ]);
+    } else {
+        throw new CiviCRM_API3_Exception(E::ts("Invalid participant status requested."));
+    }
+
+    return civicrm_api3_create_success();
 }
