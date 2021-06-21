@@ -30,7 +30,10 @@ class CRM_Eventcheckin_Form_Settings extends CRM_Core_Form
             'text',
             'external_link',
             E::ts("Custom Link"),
-            ['class' => 'huge'],
+            [
+                'class' => 'huge',
+                'placeholder' => "civicrm/event/check-in?token={token}"
+            ],
             false
         );
         $this->add(

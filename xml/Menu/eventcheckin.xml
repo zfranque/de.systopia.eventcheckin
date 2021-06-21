@@ -10,4 +10,10 @@
     <adminGroup>Communications</adminGroup>
     <icon>admin/small/rela_type.png</icon>
   </item>
+  <item>
+    <path>civicrm/event/check-in</path>
+    <page_callback>CRM_Eventcheckin_Form_CheckIn</page_callback>
+    <title>Event Check-In</title>
+    <access_arguments>access CiviCRM</access_arguments>
+  </item>
 </menu>
