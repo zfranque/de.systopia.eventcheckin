@@ -23,9 +23,15 @@ use CRM_Eventcheckin_ExtensionUtil as E;
  */
 class CRM_Eventcheckin_CheckinFields
 {
+    const PARTICIPANT_FIELDS = "id,event_id,participant_status,participant_status_id,participant_register_date";
+    const CONTACT_FIELDS = "id,first_name,display_name,last_name";
+    const EVENT_FIELDS = "id,title,start_date,end_date,is_active";
+
     /**
      * Get a list of all field specs that _could_ be displayed
      *  on the checkin screen to verify the participant
+     *
+     * tip: if you want to add fields here, you might also have to adjust the XX_FIELDS constants above
      *
      * @return array
      *   list of field specs
@@ -57,6 +63,12 @@ class CRM_Eventcheckin_CheckinFields
                 'path'        => 'event.title',
                 'label'       => E::ts('Event Title'),
             ],
+            'participant_status'    => [
+                'name'        => 'participant_status',
+                'type'        => 'Text',
+                'path'        => 'participant.participant_status',
+                'label'       => E::ts('Participant Status'),
+            ],
             'registration_date'    => [
                 'name'        => 'registration_date',
                 'type'        => 'Date',
@@ -67,6 +79,30 @@ class CRM_Eventcheckin_CheckinFields
 
     }
 
+    /**
+     * Get a list of of participant statuses that are considered checked-in
+     *
+     * @return array
+     *   [participant_status_id =>  participant_status_label]
+     */
+    public static function getCheckedInStatusList()
+    {
+        $result = [];
+        $checked_in_status_list = Civi::settings()->get('event_checked_in_status_list');
+        if (!empty($checked_in_status_list) && is_array($checked_in_status_list)) {
+            $status_types = civicrm_api3('ParticipantStatusType', 'get', [
+                'id' => ['IN' => $checked_in_status_list],
+                'return' => 'id,name,label',
+                'sequential' => 0,
+            ])['values'];
+            foreach ($checked_in_status_list as $checked_in_status_id) {
+                if (isset($status_types[$checked_in_status_id])) {
+                    $result[$checked_in_status_id] = $status_types[$checked_in_status_id]['label'];
+                }
+            }
+        }
+        return $result;
+    }
     /**
      * List of field_id => field_label if all eligible fields
      *
@@ -82,5 +118,146 @@ class CRM_Eventcheckin_CheckinFields
         }
 
         return $field_list;
+    }
+
+    /**
+     * Get the participant object
+     *
+     * @param integer $participant_id
+     *   the participant id
+     */
+    public static function getParticipantFields($participant_id)
+    {
+        $result = [];
+        $all_fields = self::allFields();
+        $fields_enabled = Civi::settings()->get('event_verification_fields');
+        if (!empty($fields_enabled)) {
+             foreach ($fields_enabled as $field_name) {
+                 if (!isset($all_fields[$field_name])) {
+                     Civi::log()->warning("EventCheckin: field '{$field_name}' is not defined, please revisit your configuration");
+                     continue;
+                 }
+                 $field_spec = $all_fields[$field_name];
+                 $field_spec['value'] = self::getFieldValue($field_spec, $participant_id);
+                 $result[] = $field_spec;
+             }
+        }
+        return $result;
+    }
+
+    /**
+     * Extract the field value for the given field spec
+     *
+     * @param array $field_spec
+     *   see self::allFields
+     *
+     * @param integer $particpant_id
+     *   participant id
+     *
+     * @return mixed value
+     */
+    public static function getFieldValue($field_spec, $particpant_id)
+    {
+        [$entity, $field_name] = explode('.', $field_spec['path'], 2);
+        switch (strtolower($entity)) {
+            case 'participant':
+                $participant = self::getParticipant($particpant_id);
+                return CRM_Utils_Array::value($field_name, $participant);
+
+            case 'event':
+                $event = self::getEventForParticipant($particpant_id);
+                return CRM_Utils_Array::value($field_name, $event);
+
+            case 'contact':
+                $contact = self::getContactForParticipant($particpant_id);
+                return CRM_Utils_Array::value($field_name, $contact);
+
+            default:
+                return 'ERROR';
+        }
+    }
+
+    /**
+     * Get the participant object
+     *
+     * @param integer $participant_id
+     *   the participant id
+     *
+     * @return array participant data
+     */
+    public static function getParticipant($participant_id)
+    {
+        static $participant = [];
+        if (!isset($participant[$participant_id])) {
+            $participant[$participant_id] = civicrm_api3(
+                'Participant',
+                'getsingle',
+                [
+                    'id' => $participant_id,
+                    'return' => self::PARTICIPANT_FIELDS
+                ]
+            );
+        }
+        return $participant[$participant_id];
+    }
+
+    /**
+     * Get the contact object for the participant
+     *
+     * @param integer $participant_id
+     *   the participant id
+     *
+     * @return array contact data
+     */
+    public static function getContactForParticipant($participant_id)
+    {
+        $participant = self::getParticipant($participant_id);
+        if (empty($participant['contact_id'])) {
+            return [];
+        }
+
+        $contact_id = $participant['contact_id'];
+        static $contact = [];
+        if (!isset($contact[$contact_id])) {
+            $contact[$contact_id] = civicrm_api3(
+                'Contact',
+                'getsingle',
+                [
+                    'id' => $contact_id,
+                    'return' => self::CONTACT_FIELDS
+                ]
+            );
+        }
+        return $contact[$contact_id];
+    }
+
+    /**
+     * Get the event object for the participant
+     *
+     * @param integer $participant_id
+     *   the participant id
+     *
+     * @return array event data
+     */
+    public static function getEventForParticipant($participant_id)
+    {
+        $participant = self::getParticipant($participant_id);
+        if (empty($participant['event_id'])) {
+            return [];
+        }
+
+        $event_id = $participant['event_id'];
+        static $event = [];
+        if (!isset($event[$event_id])) {
+            $event[$event_id] = civicrm_api3(
+                'Event',
+                'getsingle',
+                [
+                    'id' => $event_id,
+                    'return' => self::EVENT_FIELDS
+                ]
+            );
+        }
+        return $event[$event_id];
     }
 }

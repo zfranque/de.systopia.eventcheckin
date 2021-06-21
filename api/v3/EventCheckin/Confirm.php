@@ -40,12 +40,6 @@ function _civicrm_api3_event_checkin_confirm_spec(&$spec)
         'title'        => E::ts('Event-Check-In Token'),
         'description'  => E::ts('Submit a token to be verified'),
     ];
-    $spec['locale'] = [
-        'name'         => 'locale',
-        'api.required' => 0,
-        'title'        => E::ts('Locale'),
-        'description'  => E::ts('Locale of the field labels/etc. NOT IMPLEMENTED YET'),
-    ];
 }
 
 /**

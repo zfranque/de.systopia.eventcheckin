@@ -14,7 +14,7 @@
 
 {crmScope extensionKey='de.systopia.eventcheckin'}
 
-  <h3>{ts}Tokens Settings{/ts}</h3>
+  <h3>{ts}Token Settings{/ts}</h3>
   <div class="crm-section">
     <div class="label">{$form.token_timeout.label}&nbsp;{help id="id-token-timeout" title=$form.token_timeout.label}</div>
     <div class="content">{$form.token_timeout.html}</div>
