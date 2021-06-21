@@ -90,7 +90,7 @@ class CRM_Eventcheckin_Form_Settings extends CRM_Core_Form
             'verification_fields',
             E::ts("Fields to show for Verification"),
             CRM_Eventcheckin_CheckinFields::getFieldList(),
-            true,
+            false,
             [
                 'class' => 'crm-select2 huge',
                 'multiple' => 'multiple',
@@ -161,9 +161,9 @@ class CRM_Eventcheckin_Form_Settings extends CRM_Core_Form
     protected function getPermissionList()
     {
         $permission_list = [];
-        $permissions = CRM_Core_Permission::getCorePermissions();
-        foreach ($permissions as $key => $permission) {
-            $permission_list[$key] = $permission[0];
+        $permissions = CRM_Core_Permission::assembleBasicPermissions(true);
+        foreach ($permissions as $key => $permission_label) {
+            $permission_list[$key] = $permission_label;
         }
         return $permission_list;
     }

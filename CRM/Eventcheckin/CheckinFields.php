@@ -61,7 +61,7 @@ class CRM_Eventcheckin_CheckinFields
                 'name'        => 'registration_date',
                 'type'        => 'Date',
                 'path'        => 'participant.participant_register_date',
-                'label'       => E::ts('Event Title'),
+                'label'       => E::ts('Registration Date'),
             ],
         ];
 
