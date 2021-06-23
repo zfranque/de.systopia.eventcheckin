@@ -14,8 +14,25 @@
 
 {crmScope extensionKey='de.systopia.eventcheckin'}
 
-{htxt id='id-link-target-enabled'}
-  <p>{ts}Activate using a custom target link. Otherwise the build-in page is used.{/ts}</p>
+{htxt id='id-token-timeout'}
+  <p>{ts}If you want tokens to time out, you can set a limit here. Otherwise the links will only stop working, when the event is deactivated.{/ts}</p>
 {/htxt}
+
+{htxt id='id-external-link'}
+  <p>{ts}Activate using a custom target link, passing the using the check-in token as <code>&#123;code&#125;</code>. Otherwise the build-in CiviCRM page is used.{/ts}</p>
+{/htxt}
+
+{htxt id='id-checkin-status-list'}
+  <p>{ts}These are the participant statuses eligible for check-in. If the contact's participant is not in one of the selected statuses, check-in will be denied.{/ts}</p>
+{/htxt}
+
+{htxt id='id-checked-in-status-list'}
+  <p>{ts}These are the participant statuses considered to be "checked-in". If you have more than on, the user confirming the check-in will have to select the status.{/ts}</p>
+{/htxt}
+
+{htxt id='id-verification-fields'}
+  <p>{ts}Here you can select the participant fields to be shown to the check-in user, in order to confirm the participant's identity.{/ts}</p>
+{/htxt}
+
 
 {/crmScope}
