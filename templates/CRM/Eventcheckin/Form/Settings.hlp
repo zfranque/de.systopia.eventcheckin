@@ -19,7 +19,7 @@
 {/htxt}
 
 {htxt id='id-external-link'}
-  <p>{ts}Activate using a custom target link, passing the using the check-in token as <code>&#123;code&#125;</code>. Otherwise the build-in CiviCRM page is used.{/ts}</p>
+  <p>{ts}Activate using a custom target link, passing the check-in token as <code>&#123;code&#125;</code>. If you leave this empty, the build-in CiviCRM page is used.{/ts}</p>
 {/htxt}
 
 {htxt id='id-checkin-status-list'}
