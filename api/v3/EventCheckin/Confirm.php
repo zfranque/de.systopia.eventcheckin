@@ -59,11 +59,6 @@ function _civicrm_api3_event_checkin_confirm_spec(&$spec)
  */
 function civicrm_api3_event_checkin_confirm($params)
 {
-//    // 0) @todo remove
-//    if ($params['token'] = 'testplease') {
-//        $params['token'] = CRM_Remotetools_SecureToken::generateEntityToken('Participant', 1, null, 'checkin');
-//    }
-
     // 1) VERIFY (might throw an exception)
     $verification_result = civicrm_api3('EventCheckin', 'verify', $params);
 

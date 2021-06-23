@@ -89,4 +89,34 @@ class CRM_Eventcheckin_CheckinCode
         // todo: here we could implement settings like '1 hour after the event started' based on the participant id
         return Civi::settings()->get('event_checkin_timeout');
     }
+
+
+    /**
+     * Execute the actual check-in of the contact
+     *
+     * @param string token
+     *   the token submitted
+     *
+     * @param integer $participant_status_id
+     *   the target participant status
+     *
+     * @throws \Exception if something goes wrong
+     */
+    public static function checkInParticipant($token, $participant_status_id)
+    {
+        // get participant
+        $participant_id = CRM_Remotetools_SecureToken::decodeEntityToken('Participant', $token, 'checkin');
+        if (!$participant_id) {
+            throw new CiviCRM_API3_Exception(E::ts("Invalid Token"));
+        }
+
+        // verify participant (yes, again!)
+        civicrm_api3('EventCheckin', 'verify', ['token' => $token]);
+
+        // finally: update participant status
+        civicrm_api3('Participant', 'create', [
+            'id' => $participant_id,
+            'participant_status_id' => $participant_status_id
+        ]);
+    }
 }

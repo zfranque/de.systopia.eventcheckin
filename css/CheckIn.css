@@ -1,0 +1,35 @@
+/*-------------------------------------------------------+
+| SYSTOPIA Remote Event Extension                        |
+| Copyright (C) 2020 SYSTOPIA                            |
+| Author: B. Endres (endres@systopia.de)                 |
++--------------------------------------------------------+
+| This program is released as free software under the    |
+| Affero GPL license. You can redistribute it and/or     |
+| modify it under the terms of this license which you    |
+| can read by viewing the included agpl.txt or online    |
+| at www.gnu.org/licenses/agpl.html. Removal of this     |
+| copyright header is strictly prohibited without        |
+| written permission from the original author(s).        |
++--------------------------------------------------------*/
+
+div.crm-event-checkin.crm-event-checkin-status {
+  font-size: large;
+  text-align: center;
+  color: white;
+  border-color: #ffcccb;
+  width:95%;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  border:1px solid transparent;
+  border-radius:8px
+}
+
+div.crm-event-checkin.crm-event-checkin-error {
+  background-color: red;
+}
+
+div.crm-event-checkin.crm-event-checkin-success {
+  background-color: green;
+}

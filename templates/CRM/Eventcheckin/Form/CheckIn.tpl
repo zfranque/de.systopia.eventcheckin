@@ -14,23 +14,22 @@
 
 {crmScope extensionKey='de.systopia.eventcheckin'}
 
-  {if $error_message}
-    <div class="crm-event-checkin crm-event-checkin-error">{ts}Error:{/ts} {$error_message}</div>
-  {else}
-
-    {foreach from=$fields item=field}
-      <div class="crm-section crm-event-checkin crm-event-checkin-attributes">
-        <div class="label">{$field.label}</div>
-        <div class="content">{$field.value}</div>
-        <div class="clear"></div>
-      </div>
-
-    {/foreach}
-
-    <div class="crm-submit-buttons">
-      {include file="CRM/common/formButtons.tpl" location="bottom"}
+{if $status_message}
+  <div class="crm-event-checkin crm-event-checkin-status crm-event-checkin-{$status_type}">{$status_message}</div>
+{else}
+  {foreach from=$fields item=field}
+    <div class="crm-section crm-event-checkin crm-event-checkin-attributes">
+      <div class="label">{$field.label}</div>
+      <div class="content">{$field.value}</div>
+      <div class="clear"></div>
     </div>
-  {/if}
+
+  {/foreach}
+
+  <div class="crm-submit-buttons">
+    {include file="CRM/common/formButtons.tpl" location="bottom"}
+  </div>
+{/if}
 
 
 {/crmScope}
