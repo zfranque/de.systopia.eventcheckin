@@ -29,7 +29,7 @@ In order to check in other contacts, your user has to have the
 If you're using the remote check-in feature, the API user has to have the 
 "RemoteContacts: Check-In Event Participants" (``remote event checkin``) permission, 
 and the user contact identified by the ``remote_contact_id`` must have the 
-"RemoteEvent Check-In User" role.
+"Remote Check-In User" role.
 
 ## Requirements
 

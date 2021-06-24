@@ -30,7 +30,7 @@
   <h3>{ts}Check-In Settings{/ts}</h3>
   <div id="help">
     {ts}In order to check in other contacts, your user has to have the "Check-In Event Participants" (<code>event checkin</code>) permission.{/ts}
-    {ts}If you're using the remote check-in feature, the API user has to have the "RemoteContacts: Check-In Event Participants" (<code>remote event checkin</code>) permission, and the user contact identified by the <code>remote_contact_id</code> must have the "RemoteEvent Check-In User" role.{/ts}
+    {ts}If you're using the remote check-in feature, the API user has to have the "RemoteContacts: Check-In Event Participants" (<code>remote event checkin</code>) permission, and the user contact identified by the <code>remote_contact_id</code> must have the "Remote Check-In User" role.{/ts}
   </div>
 
   <div class="crm-section">
