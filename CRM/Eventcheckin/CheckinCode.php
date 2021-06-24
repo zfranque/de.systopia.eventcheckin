@@ -72,6 +72,9 @@ class CRM_Eventcheckin_CheckinCode
         $external_link = Civi::settings()->get('event_checkin_link');
         if ($external_link) {
             $link = preg_replace('/\{code\}/', $token, $external_link);
+            if (substr($link, 0, 8) == 'civicrm/') {
+                $link = CRM_Utils_System::url($link);
+            }
         } else {
             $link = CRM_Utils_System::url('civicrm/event/check-in?token=' . $token);
         }
