@@ -13,7 +13,7 @@
 | written permission from the original author(s).        |
 +--------------------------------------------------------*/
 
-require_once 'remoteevent.civix.php';
+require_once 'eventcheckin.civix.php';
 
 use CRM_Eventcheckin_ExtensionUtil as E;
 
