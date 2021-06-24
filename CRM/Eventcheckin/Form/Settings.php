@@ -119,7 +119,11 @@ class CRM_Eventcheckin_Form_Settings extends CRM_Core_Form
         Civi::settings()->set('event_checked_in_status_list', $values['checked_in_status_list']);
         Civi::settings()->set('event_verification_fields', $values['verification_fields']);
 
-        CRM_Core_Session::setStatus(E::ts("Settings Updated"));
+        CRM_Core_Session::setStatus(
+            E::ts("Settings Updated"),
+            E::ts("Success"),
+            'info'
+        );
         parent::postProcess();
     }
 
