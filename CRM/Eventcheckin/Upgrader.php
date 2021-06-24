@@ -26,7 +26,7 @@ class CRM_Eventcheckin_Upgrader extends CRM_Eventcheckin_Upgrader_Base {
     public function install()
     {
         // install necessary data
-        $customData = new CRM_Remoteevent_CustomData(E::LONG_NAME);
+        $customData = new CRM_Remotetools_CustomData(E::LONG_NAME);
         $customData->syncOptionGroup(E::path('resources/option_group_remote_contact_roles.json'));
     }
 
@@ -39,7 +39,7 @@ class CRM_Eventcheckin_Upgrader extends CRM_Eventcheckin_Upgrader_Base {
     public function upgrade_0001()
     {
         $this->ctx->log->info('Adding remote contact role');
-        $customData = new CRM_Remoteevent_CustomData(E::LONG_NAME);
+        $customData = new CRM_Remotetools_CustomData(E::LONG_NAME);
         $customData->syncOptionGroup(E::path('resources/option_group_remote_contact_roles.json'));
         return true;
     }
