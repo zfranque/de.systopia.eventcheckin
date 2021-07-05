@@ -24,7 +24,7 @@ use CRM_Eventcheckin_ExtensionUtil as E;
 class CRM_Eventcheckin_CheckinFields
 {
     const PARTICIPANT_FIELDS = "id,event_id,participant_status,participant_status_id,participant_register_date,display_name,contact_id,participant_role";
-    const CONTACT_FIELDS = "id,first_name,display_name,last_name";
+    const CONTACT_FIELDS = "id,first_name,display_name,last_name,preferred_language";
     const EVENT_FIELDS = "id,title,start_date,end_date,is_active";
 
     /**
@@ -57,6 +57,12 @@ class CRM_Eventcheckin_CheckinFields
                 'path'        => 'contact.display_name',
                 'label'       => E::ts('Display Name'),
             ],
+            'preferred_language' => [
+                'name'        => 'preferred_language',
+                'type'        => 'Text',
+                'path'        => 'contact.preferred_language',
+                'label'       => E::ts('Preferred Language'),
+            ],
             'display_name_link' => [
                 'name'        => 'display_name_link',
                 'type'        => 'Text',
@@ -68,6 +74,12 @@ class CRM_Eventcheckin_CheckinFields
                 'type'        => 'Text',
                 'path'        => 'participant.display_name',
                 'label'       => E::ts('Participant Link'),
+            ],
+            'participant_roles' => [
+                'name'        => 'participant_roles',
+                'type'        => 'Text',
+                'path'        => 'participant.participant_role',
+                'label'       => E::ts('Participant Role(s)'),
             ],
             'event_title'    => [
                 'name'        => 'event_title',
@@ -204,6 +216,11 @@ class CRM_Eventcheckin_CheckinFields
                     2 => $entity_data['display_name'],
                     3 => $entity_data['id'],
                 ]);
+
+            case 'preferred_language':
+                $languages = CRM_Core_I18n::languages(false);
+                $language = CRM_Utils_Array::value($entity_data['preferred_language'], $languages, E::ts("unknown"));
+                return ts($language);
 
             default:
                 return CRM_Utils_Array::value($field_name, $entity_data);
