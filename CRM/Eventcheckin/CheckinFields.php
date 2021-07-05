@@ -23,7 +23,7 @@ use CRM_Eventcheckin_ExtensionUtil as E;
  */
 class CRM_Eventcheckin_CheckinFields
 {
-    const PARTICIPANT_FIELDS = "id,event_id,participant_status,participant_status_id,participant_register_date";
+    const PARTICIPANT_FIELDS = "id,event_id,participant_status,participant_status_id,participant_register_date,display_name,contact_id,participant_role";
     const CONTACT_FIELDS = "id,first_name,display_name,last_name";
     const EVENT_FIELDS = "id,title,start_date,end_date,is_active";
 
@@ -56,6 +56,18 @@ class CRM_Eventcheckin_CheckinFields
                 'type'        => 'Text',
                 'path'        => 'contact.display_name',
                 'label'       => E::ts('Display Name'),
+            ],
+            'display_name_link' => [
+                'name'        => 'display_name_link',
+                'type'        => 'Text',
+                'path'        => 'contact.display_name',
+                'label'       => E::ts('Contact Link'),
+            ],
+            'participant_link' => [
+                'name'        => 'participant_link',
+                'type'        => 'Text',
+                'path'        => 'participant.display_name',
+                'label'       => E::ts('Participant Link'),
             ],
             'event_title'    => [
                 'name'        => 'event_title',
@@ -158,22 +170,43 @@ class CRM_Eventcheckin_CheckinFields
      */
     public static function getFieldValue($field_spec, $particpant_id)
     {
+        // get entity
         [$entity, $field_name] = explode('.', $field_spec['path'], 2);
         switch (strtolower($entity)) {
             case 'participant':
-                $participant = self::getParticipant($particpant_id);
-                return CRM_Utils_Array::value($field_name, $participant);
+                $entity_data = self::getParticipant($particpant_id);
+                break;
 
             case 'event':
-                $event = self::getEventForParticipant($particpant_id);
-                return CRM_Utils_Array::value($field_name, $event);
+                $entity_data = self::getEventForParticipant($particpant_id);
+                break;
 
             case 'contact':
-                $contact = self::getContactForParticipant($particpant_id);
-                return CRM_Utils_Array::value($field_name, $contact);
+                $entity_data = self::getContactForParticipant($particpant_id);
+                break;
 
             default:
-                return 'ERROR';
+                $entity_data = [];
+        }
+
+        // get field value
+        switch (strtolower($field_spec['name'])) {
+            case 'display_name_link':
+                return E::ts('<a href="%1" target="_blank">%2 [%3]</a>', [
+                    1 => CRM_Utils_System::url('civicrm/contact/view', "reset=1&cid={$entity_data['id']}"),
+                    2 => $entity_data['display_name'],
+                    3 => $entity_data['id'],
+                ]);
+
+            case 'participant_link':
+                return E::ts('<a href="%1" target="_blank" class="crm-popup small-popup">%2 [%3]</a>', [
+                    1 => CRM_Utils_System::url('civicrm/contact/view/participant', "reset=1&id={$entity_data['id']}&cid={$entity_data['contact_id']}&action=view"),
+                    2 => $entity_data['display_name'],
+                    3 => $entity_data['id'],
+                ]);
+
+            default:
+                return CRM_Utils_Array::value($field_name, $entity_data);
         }
     }
 
