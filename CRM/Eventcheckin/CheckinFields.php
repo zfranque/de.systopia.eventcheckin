@@ -390,7 +390,7 @@ class CRM_Eventcheckin_CheckinFields
                 'extends'      => ['IN'=>['Event', 'Participant', 'Contact', 'Individual', 'Household', 'Organization']],
                 'is_active'    => 1,
                 'is_multiple'  => 0,
-                'return'       => 'id,extends',
+                'return'       => 'id,extends,sequential',
                 'option.limit' => 0,
                 'sequential'   => 0,
             ])['values'];
@@ -400,14 +400,17 @@ class CRM_Eventcheckin_CheckinFields
             $custom_fields_list = civicrm_api3('CustomField', 'get', [
                 'custom_group_id' => ['IN' => $custom_group_ids],
                 'is_active'       => 1,
-                'serialize'       => ['IS NULL' => 1],
+                //'serialize'       => ['IS NULL' => 1], doesn't work, can also be zero
                 'option.limit'    => 0,
                 'sequential'      => 0,
-                'return'          => 'id,data_type,html_type,option_group_id,custom_group_id,label',
+                'return'          => 'id,data_type,html_type,option_group_id,custom_group_id,label,serialize',
             ])['values'];
 
             // add to our structure
             foreach ($custom_fields_list as $custom_field) {
+                // for now, restrict to single-value
+                if (!empty($custom_field['serialize'])) continue;
+
                 $extends = $custom_group_list[$custom_field['custom_group_id']]['extends'];
                 $custom_field['extends'] = $extends;
                 switch ($extends) {
