@@ -38,7 +38,7 @@ class CRM_Eventcheckin_CheckinFields
      */
     public static function allFields()
     {
-        return [
+        $fields = [
             'first_name'   => [
                 'name'        => 'first_name',
                 'type'        => 'Text',
@@ -101,6 +101,10 @@ class CRM_Eventcheckin_CheckinFields
             ],
         ];
 
+        // add custom fields
+        self::addCustomFields($fields);
+
+        return $fields;
     }
 
     /**
@@ -223,7 +227,10 @@ class CRM_Eventcheckin_CheckinFields
                 return ts($language);
 
             default:
-                return CRM_Utils_Array::value($field_name, $entity_data);
+                // get the raw value
+                $value = CRM_Utils_Array::value($field_name, $entity_data);
+                // resolve option values, if necessary
+                return self::resolveOptionValues($field_name, $value);
         }
     }
 
@@ -244,7 +251,7 @@ class CRM_Eventcheckin_CheckinFields
                 'getsingle',
                 [
                     'id' => $participant_id,
-                    'return' => self::PARTICIPANT_FIELDS
+                    'return' => self::PARTICIPANT_FIELDS . self::getCustomFieldKeysFor('participant'),
                 ]
             );
         }
@@ -274,7 +281,7 @@ class CRM_Eventcheckin_CheckinFields
                 'getsingle',
                 [
                     'id' => $contact_id,
-                    'return' => self::CONTACT_FIELDS
+                    'return' => self::CONTACT_FIELDS . self::getCustomFieldKeysFor('contact'),
                 ]
             );
         }
@@ -304,10 +311,141 @@ class CRM_Eventcheckin_CheckinFields
                 'getsingle',
                 [
                     'id' => $event_id,
-                    'return' => self::EVENT_FIELDS
+                    'return' => self::EVENT_FIELDS . self::getCustomFieldKeysFor('event'),
                 ]
             );
         }
         return $event[$event_id];
+    }
+
+    /**
+     * Get a list of custom fields for the 'Contact', 'Participant' and 'Event' entities
+     */
+    protected static function getCustomFieldKeysFor($entity)
+    {
+        $custom_field_keys = [];
+        $all_eligible_custom_fields = self::getEligibleCustomFields();
+        $entity_custom_fields = CRM_Utils_Array::value(strtolower($entity), $all_eligible_custom_fields, []);
+        foreach ($entity_custom_fields as $custom_field) {
+            $custom_field_keys[] = 'custom_' . $custom_field['id'];
+        }
+        if (empty($custom_field_keys)) {
+            return '';
+        } else {
+            return ',' . implode(',', $custom_field_keys);
+        }
+    }
+
+    /**
+     * Resolve a
+     * @param $field_name
+     * @param $value
+     */
+    protected static function resolveOptionValues($field_name, $value)
+    {
+        // resolve custom field option values
+        if (substr($field_name, 0, 7) == 'custom_') {
+            // this is a custom field, check if we have to resolve any option group
+            $custom_field_id = substr($field_name, 7);
+            $custom_fields = self::getEligibleCustomFields();
+            foreach ($custom_fields as $entity => $entity_fields) {
+                if (isset($entity_fields[$custom_field_id])) {
+                    $custom_field = $entity_fields[$custom_field_id];
+                    if (!empty($custom_field['option_group_id'])) {
+                        // for now only single value
+                        try {
+                            return civicrm_api3('OptionValue', 'getvalue', [
+                               'return'          => 'label',
+                               'option_group_id' => $custom_field['option_group_id'],
+                               'value'           => $value
+                            ]);
+                        } catch (CiviCRM_API3_Exception $ex) {
+                            // lookup failed
+                            return $value;
+                        }
+                    }
+                }
+            }
+        }
+
+        return $value;
+    }
+
+    /**
+     * Get a list of custom fields for the 'Contact', 'Participant' and 'Event' entities
+     */
+    protected static function getEligibleCustomFields()
+    {
+        static $custom_fields = null;
+        if ($custom_fields === null) {
+            // initialise result
+            $custom_fields = [
+                'contact'     => [],
+                'participant' => [],
+                'event'       => [],
+            ];
+
+            // run an API query to select all eligible custom groups
+            $custom_group_list = civicrm_api3('CustomGroup', 'get', [
+                'extends'      => ['IN'=>['Event', 'Participant', 'Contact', 'Individual', 'Household', 'Organization']],
+                'is_active'    => 1,
+                'is_multiple'  => 0,
+                'return'       => 'id,extends',
+                'option.limit' => 0,
+                'sequential'   => 0,
+            ])['values'];
+            $custom_group_ids = array_keys($custom_group_list);
+
+            // now find all eligible fields
+            $custom_fields_list = civicrm_api3('CustomField', 'get', [
+                'custom_group_id' => ['IN' => $custom_group_ids],
+                'is_active'       => 1,
+                'serialize'       => ['IS NULL' => 1],
+                'option.limit'    => 0,
+                'sequential'      => 0,
+                'return'          => 'id,data_type,html_type,option_group_id,custom_group_id,label',
+            ])['values'];
+
+            // add to our structure
+            foreach ($custom_fields_list as $custom_field) {
+                $extends = $custom_group_list[$custom_field['custom_group_id']]['extends'];
+                $custom_field['extends'] = $extends;
+                switch ($extends) {
+                    case 'Event':
+                        $custom_fields['event'][$custom_field['id']] = $custom_field;
+                        break;
+
+                    case 'Participant':
+                        $custom_fields['participant'][$custom_field['id']] = $custom_field;
+                        break;
+
+                    default:
+                        $custom_fields['contact'][$custom_field['id']] = $custom_field;
+                }
+            }
+        }
+        return $custom_fields;
+    }
+
+    /**
+     * Add all available custom fields for the 'Contact', 'Participant' and 'Event' fields
+     */
+    protected static function addCustomFields(&$fields)
+    {
+        $all_custom_fields = self::getEligibleCustomFields();
+        foreach ($all_custom_fields as $entity => $custom_fields) {
+            foreach ($custom_fields as $custom_field) {
+                $key = 'custom_' . $custom_field['id'];
+                $fields[$key] = [
+                    'name' => $key,
+                    'type' => 'Text',
+                    'path' => "{$entity}.{$key}",
+                    'label' => E::ts("%1 (%2)", [
+                        1 => $custom_field['label'],
+                        2 => E::ts($custom_field['extends'])
+                    ]),
+                ];
+            }
+        }
     }
 }
