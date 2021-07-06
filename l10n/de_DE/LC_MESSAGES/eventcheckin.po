@@ -1,0 +1,305 @@
+# Copyright CiviCRM LLC (c) 2004-2015
+# This file is distributed under the same license as the CiviCRM package.
+# If you contribute heavily to a translation and deem your work copyrightable,
+# make sure you license it to CiviCRM LLC under Academic Free License 3.0.
+msgid ""
+msgstr ""
+"Project-Id-Version: de.systopia.eventcheckin\n"
+"POT-Creation-Date: 2021-07-06 10:43+0200\n"
+"Language-Team: CiviCRM Translators <civicrm-translators@lists.civicrm.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: \n"
+"X-Generator: Poedit 2.0.6\n"
+"Last-Translator: \n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: de_DE\n"
+
+#: CRM/Eventcheckin/CheckinCode.php api/v3/EventCheckin/Confirm.php
+#: api/v3/EventCheckin/Verify.php
+msgid "Invalid Token"
+msgstr "Invalider Token"
+
+#: CRM/Eventcheckin/CheckinFields.php
+msgid "First Name"
+msgstr ""
+
+#: CRM/Eventcheckin/CheckinFields.php
+msgid "Last Name"
+msgstr ""
+
+#: CRM/Eventcheckin/CheckinFields.php
+msgid "Display Name"
+msgstr ""
+
+#: CRM/Eventcheckin/CheckinFields.php
+msgid "Preferred Language"
+msgstr ""
+
+#: CRM/Eventcheckin/CheckinFields.php
+msgid "Contact Link"
+msgstr "Kontakt-Link"
+
+#: CRM/Eventcheckin/CheckinFields.php
+msgid "Participant Link"
+msgstr "Teilnehmer-Link"
+
+#: CRM/Eventcheckin/CheckinFields.php
+msgid "Participant Role(s)"
+msgstr "Teilnehmerrolle(n)"
+
+#: CRM/Eventcheckin/CheckinFields.php
+msgid "Event Title"
+msgstr ""
+
+#: CRM/Eventcheckin/CheckinFields.php
+msgid "Participant Status"
+msgstr ""
+
+#: CRM/Eventcheckin/CheckinFields.php
+msgid "Registration Date"
+msgstr ""
+
+#: CRM/Eventcheckin/CheckinFields.php
+msgid "<a href=\"%1\" target=\"_blank\">%2 [%3]</a>"
+msgstr ""
+
+#: CRM/Eventcheckin/CheckinFields.php
+msgid ""
+"<a href=\"%1\" target=\"_blank\" class=\"crm-popup small-popup\">%2 [%3]</a>"
+msgstr ""
+
+#: CRM/Eventcheckin/CheckinFields.php
+msgid "unknown"
+msgstr "unbekannt"
+
+#: CRM/Eventcheckin/CheckinFields.php
+msgid "%1 (%2)"
+msgstr ""
+
+#: CRM/Eventcheckin/Form/CheckIn.php
+msgid "Event Check-In"
+msgstr "Event Check-In"
+
+#: CRM/Eventcheckin/Form/CheckIn.php
+msgid "Check-In (%1)"
+msgstr "Check-In (%1)"
+
+#: CRM/Eventcheckin/Form/Settings.php
+msgid "Custom Link"
+msgstr "Externer Link"
+
+#: CRM/Eventcheckin/Form/Settings.php
+msgid "Token Timeout"
+msgstr "Lebensdauer Token"
+
+#: CRM/Eventcheckin/Form/Settings.php
+msgid "Check-In Possible Status"
+msgstr "Teilnehmer Status: Check-In möglich"
+
+#: CRM/Eventcheckin/Form/Settings.php
+msgid "disabled"
+msgstr ""
+
+#: CRM/Eventcheckin/Form/Settings.php
+msgid "Checked-In Status"
+msgstr "Teilnehmer Status: eingecheckt"
+
+#: CRM/Eventcheckin/Form/Settings.php
+msgid "Fields to show for Verification"
+msgstr "Anzeige-Felder für die Verifizierung des Teilnehmers"
+
+#: CRM/Eventcheckin/Form/Settings.php
+msgid "none"
+msgstr ""
+
+#: CRM/Eventcheckin/Form/Settings.php
+msgid "Save"
+msgstr ""
+
+#: CRM/Eventcheckin/Form/Settings.php
+msgid "Settings Updated"
+msgstr "Settings Aktualisiert"
+
+#: CRM/Eventcheckin/Form/Settings.php
+msgid "Success"
+msgstr ""
+
+#: CRM/Eventcheckin/Tokens.php
+msgid "Check-In Token"
+msgstr ""
+
+#: CRM/Eventcheckin/Tokens.php
+msgid "Check-In Link"
+msgstr ""
+
+#: CRM/Eventcheckin/Tokens.php
+msgid "Check-In QR-Code (image)"
+msgstr "Check-In QR-Code (Bild)"
+
+#: CRM/Eventcheckin/Tokens.php
+msgid "Check-In QR-Code (data)"
+msgstr "Check-In QR-Code (Daten)"
+
+#: CRM/Eventcheckin/Tokens.php
+msgid "Checkin QR Code"
+msgstr "Check-In QR Code"
+
+#: CRM/Eventcheckin/Upgrader/Base.php
+msgid "Upgrade %1 to revision %2"
+msgstr ""
+
+#: api/v3/EventCheckin/Confirm.php api/v3/EventCheckin/Verify.php
+msgid "Remote Contact ID"
+msgstr ""
+
+#: api/v3/EventCheckin/Confirm.php api/v3/EventCheckin/Verify.php
+msgid "You can identify via a remote contact ID"
+msgstr ""
+
+#: api/v3/EventCheckin/Confirm.php api/v3/EventCheckin/Verify.php
+msgid "Event-Check-In Token"
+msgstr ""
+
+#: api/v3/EventCheckin/Confirm.php api/v3/EventCheckin/Verify.php
+msgid "Submit a token to be verified"
+msgstr ""
+
+#: api/v3/EventCheckin/Confirm.php
+msgid "Future Participant Status ID"
+msgstr ""
+
+#: api/v3/EventCheckin/Confirm.php
+msgid "You have to provide the status ID if more than two are configured."
+msgstr ""
+"Gibt es mehr als einen zukünftigen Teilnehmer-Status, so muss dieser mit "
+"übermittelt werden."
+
+#: api/v3/EventCheckin/Confirm.php
+msgid "Invalid participant status requested."
+msgstr "Illegaler Teilnehmer-Status angefordert."
+
+#: api/v3/EventCheckin/Verify.php
+msgid ""
+"remote_contact_id is mandatory with the 'remote event checkin' permission"
+msgstr ""
+
+#: api/v3/EventCheckin/Verify.php
+msgid "remote_contact_id is not valid."
+msgstr ""
+
+#: api/v3/EventCheckin/Verify.php
+msgid "Remote contact does not have the 'remote-event-check-in' role."
+msgstr ""
+
+#: api/v3/EventCheckin/Verify.php
+msgid "Permission denied"
+msgstr ""
+
+#: api/v3/EventCheckin/Verify.php
+msgid "Participant [%1] doesn't exist (any more)."
+msgstr "Teilnehmer [%1] ist nicht (mehr) im System."
+
+#: api/v3/EventCheckin/Verify.php
+msgid "No eligible statuses for checkin configured."
+msgstr "Keine Status für einzucheckende Teilnehmer konfiguriert."
+
+#: api/v3/EventCheckin/Verify.php
+msgid "No eligible target statuses for checkin configured."
+msgstr "Keine Status für eingecheckte Teilnehmer konfiguriert."
+
+#: api/v3/EventCheckin/Verify.php
+msgid ""
+"Participant's status is currently '%1', and is therefore not eligible for "
+"check-in"
+msgstr ""
+"Teilnehmerstatus ist aktuell '%1', und kann daher nicht eingecheckt werden"
+
+#: api/v3/EventCheckin/Verify.php
+msgid "Event is not active any more"
+msgstr "Veranstaltung ist nicht mehr aktiv"
+
+#: eventcheckin.php
+msgid "Check-In Event Participants"
+msgstr "Teilnehmer Einchecken"
+
+#: eventcheckin.php
+msgid "RemoteContacts: Check-In Event Participants"
+msgstr ""
+
+#: templates/CRM/Eventcheckin/Form/Settings.hlp
+msgid ""
+"If you want tokens to time out, you can set a limit here. Otherwise the "
+"links will only stop working, when the event is deactivated."
+msgstr ""
+"Wenn gewünscht ist, dass die Tokens nach einer gewissen Zeit verfallen, so "
+"kann hier ein Zeitlimit gesetzt werden. Andernfalls wird das Token ungültig "
+"wenn die Veranstaltung deaktiviert wird."
+
+#: templates/CRM/Eventcheckin/Form/Settings.hlp
+msgid ""
+"Activate using a custom target link, passing the check-in token as "
+"<code>&#123;code&#125;</code>. If you leave this empty, the build-in CiviCRM "
+"page is used."
+msgstr ""
+"Um eine externe Check-In Seite zu verwenden, kann hier ein "
+"benutzerdefinierter Link generiert werden. Dabei wird der Token via "
+"<code>&#123;code&#125;</code> eingebunden. Wenn dieses Feld leer bleibt, so "
+"wird die CiviCRM interne Check-In Seite verwendet."
+
+#: templates/CRM/Eventcheckin/Form/Settings.hlp
+msgid ""
+"These are the participant statuses eligible for check-in. If the contact's "
+"participant is not in one of the selected statuses, check-in will be denied."
+msgstr ""
+"Dies sind die Teilnehmerstatus für die ein Check-In möglich ist. Falls ein "
+"Teilnehmer keinen dieser Status hat, so wird ein Check-In verweigert."
+
+#: templates/CRM/Eventcheckin/Form/Settings.hlp
+msgid ""
+"These are the participant statuses considered to be \"checked-in\". If you "
+"have more than on, the user confirming the check-in will have to select the "
+"status."
+msgstr ""
+"Dies sind die Teilnehmer-Status die als \"eingecheckt\" gelten. Falls es "
+"mehr als einen gibt, so wird dieser auf der Check-In Seite zur Auswahl "
+"angeboten."
+
+#: templates/CRM/Eventcheckin/Form/Settings.hlp
+msgid ""
+"Here you can select the participant fields to be shown to the check-in user, "
+"in order to confirm the participant's identity."
+msgstr ""
+"Hier können Sie Teilnehmer Informationen auswählen, die beim Check-In "
+"angezeigt werden. Mit deren Hilfe sollte es dann möglich sein, der/die "
+"TeilnehmerIn zu identifizieren, und den richtigen Status zu ermitteln."
+
+#: templates/CRM/Eventcheckin/Form/Settings.tpl
+msgid "Token Settings"
+msgstr "Token Einstellungen"
+
+#: templates/CRM/Eventcheckin/Form/Settings.tpl
+msgid "Check-In Settings"
+msgstr "Check-In Einstellungen"
+
+#: templates/CRM/Eventcheckin/Form/Settings.tpl
+msgid ""
+"In order to check in other contacts, your user has to have the \"Check-In "
+"Event Participants\" (<code>event checkin</code>) permission."
+msgstr ""
+"Um Teilnehmer einzuchecken muss der aktuelle Benutzer über die \"Check-In "
+"Event Participants\" (<code>event checkin</code>) Berechtigung verfügen."
+
+#: templates/CRM/Eventcheckin/Form/Settings.tpl
+msgid ""
+"If you're using the remote check-in feature, the API user has to have the "
+"\"RemoteContacts: Check-In Event Participants\" (<code>remote event checkin</"
+"code>) permission, and the user contact identified by the "
+"<code>remote_contact_id</code> must have the \"Remote Check-In User\" role."
+msgstr ""
+"Falls Sie die \"Remote Check-In\" Funktionalität mit einer externen Website "
+"verwenden wollen, so muss deren API User die \"RemoteContacts: Check-In "
+"Event Participants\" (<code>remote event checkin</code>) Berechtigung haben, "
+"und der Benutzer der mittels der <code>remote_contact_id</code> "
+"identifiziert wurde, muss die \"Remote Check-In User\" Rolle haben."

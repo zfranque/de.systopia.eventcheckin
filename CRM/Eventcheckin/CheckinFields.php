@@ -187,7 +187,7 @@ class CRM_Eventcheckin_CheckinFields
     public static function getFieldValue($field_spec, $particpant_id)
     {
         // get entity
-        [$entity, $field_name] = explode('.', $field_spec['path'], 2);
+        list($entity, $field_name) = explode('.', $field_spec['path'], 2);
         switch (strtolower($entity)) {
             case 'participant':
                 $entity_data = self::getParticipant($particpant_id);
