@@ -46,10 +46,22 @@ class CRM_Eventcheckin_Form_CheckIn extends CRM_Core_Form
             }
             $this->addButtons($buttons);
 
+            // should we show the check-in buttons in top, too?
+            $show_top_buttons =    (count($checkin_data['checkin_options']) <= 2) // no more than two options
+                                && (count($checkin_data['values']) <= 5);         // no more than 5 fields
+            $this->assign('show_buttons_top', $show_top_buttons);
+
         } catch (CiviCRM_API3_Exception $ex) {
             $error_message = $ex->getMessage();
             $this->assign('status_type', 'error');
             $this->assign('status_message', $error_message);
+
+            // show the fields anyway, if we have a participant ID:
+            $participant_id = CRM_Remotetools_SecureToken::decodeEntityToken('Participant', $this->token, 'checkin');
+            if ($participant_id) {
+                $fields = CRM_Eventcheckin_CheckinFields::getParticipantFields($participant_id);
+                $this->assign('fields', $fields);
+            }
         }
 
         Civi::resources()->addStyleUrl(E::url('css/CheckIn.css'));
