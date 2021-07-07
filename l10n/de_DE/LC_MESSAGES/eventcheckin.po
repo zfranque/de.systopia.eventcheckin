@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: de.systopia.eventcheckin\n"
-"POT-Creation-Date: 2021-07-07 18:27+0200\n"
+"POT-Creation-Date: 2021-07-07 18:33+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: CiviCRM Translators <civicrm-translators@lists.civicrm.org>\n"
@@ -92,7 +92,19 @@ msgstr "Externer Link"
 
 #: CRM/Eventcheckin/Form/Settings.php
 msgid "Token Timeout"
-msgstr "Lebensdauer Token"
+msgstr "Token Verfällt"
+
+#: CRM/Eventcheckin/Form/Settings.php
+msgid "never"
+msgstr "niemals"
+
+#: CRM/Eventcheckin/Form/Settings.php
+msgid "1 week"
+msgstr "nach einer Woche"
+
+#: CRM/Eventcheckin/Form/Settings.php
+msgid "1 month"
+msgstr "nach einem Monat"
 
 #: CRM/Eventcheckin/Form/Settings.php
 msgid "Check-In Possible Status"

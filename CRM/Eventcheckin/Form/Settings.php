@@ -46,9 +46,9 @@ class CRM_Eventcheckin_Form_Settings extends CRM_Core_Form
             'token_timeout',
             E::ts("Token Timeout"),
             [
-                ''         => 'never',
-                "+1 week"  => '1 week',
-                "+1 month" => '1 month',
+                ''         => E::ts('never'),
+                "+1 week"  => E::ts('1 week'),
+                "+1 month" => E::ts('1 month'),
             ],
             false,
             [
