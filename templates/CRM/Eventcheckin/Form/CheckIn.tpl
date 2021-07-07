@@ -13,40 +13,45 @@
 +-------------------------------------------------------*}
 
 {crmScope extensionKey='de.systopia.eventcheckin'}
+  <div class="crm-block crm-form-block">
 
+    <h3>{ts}Participant information{/ts}</h3>
 
-{if $status_message}
-  <div class="crm-event-checkin crm-event-checkin-status crm-event-checkin-{$status_type}">{$status_message}</div>
+    {if $status_message}
 
-  {foreach from=$fields item=field}
-    <div class="crm-section crm-event-checkin crm-event-checkin-attributes">
-      <div class="label">{$field.label}</div>
-      <div class="content">{$field.value}</div>
-      <div class="clear"></div>
-    </div>
-  {/foreach}
+      <div class="crm-event-checkin crm-event-checkin-status crm-event-checkin-{$status_type}">
+        {$status_message}
+      </div>
 
-{else}
+      {foreach from=$fields item=field}
+        <div class="crm-section crm-event-checkin crm-event-checkin-attributes">
+          <div class="label">{$field.label}</div>
+          <div class="content">{$field.value}</div>
+          <div class="clear"></div>
+        </div>
+      {/foreach}
 
-  {if $show_buttons_top}
-  <div class="crm-submit-buttons">
-    {include file="CRM/common/formButtons.tpl" location="top"}
+    {else}
+
+      {if $show_buttons_top}
+        <div class="crm-submit-buttons">
+          {include file="CRM/common/formButtons.tpl" location="top"}
+        </div>
+      {/if}
+
+      {foreach from=$fields item=field}
+        <div class="crm-section crm-event-checkin crm-event-checkin-attributes">
+          <div class="label">{$field.label}</div>
+          <div class="content">{$field.value}</div>
+          <div class="clear"></div>
+        </div>
+      {/foreach}
+
+      <div class="crm-submit-buttons">
+        {include file="CRM/common/formButtons.tpl" location="bottom"}
+      </div>
+    {/if}
   </div>
-  {/if}
-
-  {foreach from=$fields item=field}
-    <div class="crm-section crm-event-checkin crm-event-checkin-attributes">
-      <div class="label">{$field.label}</div>
-      <div class="content">{$field.value}</div>
-      <div class="clear"></div>
-    </div>
-  {/foreach}
-
-  <div class="crm-submit-buttons">
-    {include file="CRM/common/formButtons.tpl" location="bottom"}
-  </div>
-{/if}
-
 
 {/crmScope}
 

@@ -13,46 +13,65 @@
 +-------------------------------------------------------*}
 
 {crmScope extensionKey='de.systopia.eventcheckin'}
+  <div class="crm-block crm-form-block">
 
-  <h3>{ts}Token Settings{/ts}</h3>
-  <div class="crm-section">
-    <div class="label">{$form.token_timeout.label}&nbsp;{help id="id-token-timeout" title=$form.token_timeout.label}</div>
-    <div class="content">{$form.token_timeout.html}</div>
-    <div class="clear"></div>
-  </div>
+    <div class="crm-submit-buttons">
+      {include file="CRM/common/formButtons.tpl" location="top"}
+    </div>
 
-  <div class="crm-section">
-    <div class="label">{$form.external_link.label}&nbsp;{help id="id-external-link" title=$form.external_link.label}</div>
-    <div class="content">{$form.external_link.html}</div>
-    <div class="clear"></div>
-  </div>
+    <fieldset>
 
-  <h3>{ts}Check-In Settings{/ts}</h3>
-  <div id="help">
-    {ts}In order to check in other contacts, your user has to have the "Check-In Event Participants" (<code>event checkin</code>) permission.{/ts}
-    {ts}If you're using the remote check-in feature, the API user has to have the "RemoteContacts: Check-In Event Participants" (<code>remote event checkin</code>) permission, and the user contact identified by the <code>remote_contact_id</code> must have the "Remote Check-In User" role.{/ts}
-  </div>
+      <legend>{ts}Token Settings{/ts}</legend>
 
-  <div class="crm-section">
-    <div class="label">{$form.checkin_status_list.label}&nbsp;{help id="id-checkin-status-list" title=$form.checkin_status_list.label}</div>
-    <div class="content">{$form.checkin_status_list.html}</div>
-    <div class="clear"></div>
-  </div>
+      <div class="crm-section">
+        <div class="label">{$form.token_timeout.label}
+          &nbsp;{help id="id-token-timeout" title=$form.token_timeout.label}</div>
+        <div class="content">{$form.token_timeout.html}</div>
+        <div class="clear"></div>
+      </div>
 
-  <div class="crm-section">
-    <div class="label">{$form.checked_in_status_list.label}&nbsp;{help id="id-checked-in-status-list" title=$form.checked_in_status_list.label}</div>
-    <div class="content">{$form.checked_in_status_list.html}</div>
-    <div class="clear"></div>
-  </div>
+      <div class="crm-section">
+        <div class="label">{$form.external_link.label}
+          &nbsp;{help id="id-external-link" title=$form.external_link.label}</div>
+        <div class="content">{$form.external_link.html}</div>
+        <div class="clear"></div>
+      </div>
 
-  <div class="crm-section">
-    <div class="label">{$form.verification_fields.label}&nbsp;{help id="id-verification-fields" title=$form.verification_fields.label}</div>
-    <div class="content">{$form.verification_fields.html}</div>
-    <div class="clear"></div>
-  </div>
+    </fieldset>
 
-  <div class="crm-submit-buttons">
-    {include file="CRM/common/formButtons.tpl" location="bottom"}
+    <fieldset>
+
+      <legend>{ts}Check-In Settings{/ts}</legend>
+
+      <div id="help">
+        {ts}In order to check in other contacts, your user has to have the "Check-In Event Participants" (<code>event checkin</code>) permission.{/ts}
+        {ts}If you're using the remote check-in feature, the API user has to have the "RemoteContacts: Check-In Event Participants" (<code>remote event checkin</code>) permission, and the user contact identified by the <code>remote_contact_id</code> must have the "Remote Check-In User" role.{/ts}
+      </div>
+
+      <div class="crm-section">
+        <div class="label">{$form.checkin_status_list.label}&nbsp;{help id="id-checkin-status-list" title=$form.checkin_status_list.label}</div>
+        <div class="content">{$form.checkin_status_list.html}</div>
+        <div class="clear"></div>
+      </div>
+
+      <div class="crm-section">
+        <div class="label">{$form.checked_in_status_list.label}&nbsp;{help id="id-checked-in-status-list" title=$form.checked_in_status_list.label}</div>
+        <div class="content">{$form.checked_in_status_list.html}</div>
+        <div class="clear"></div>
+      </div>
+
+      <div class="crm-section">
+        <div class="label">{$form.verification_fields.label}&nbsp;{help id="id-verification-fields" title=$form.verification_fields.label}</div>
+        <div class="content">{$form.verification_fields.html}</div>
+        <div class="clear"></div>
+      </div>
+
+    </fieldset>
+
+    <div class="crm-submit-buttons">
+      {include file="CRM/common/formButtons.tpl" location="bottom"}
+    </div>
+
   </div>
 
 {/crmScope}
