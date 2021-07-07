@@ -66,6 +66,12 @@
         <div class="clear"></div>
       </div>
 
+      <div class="crm-section">
+        <div class="label">{$form.button_position.label}&nbsp;{help id="id-button-position" title=$form.button_position.label}</div>
+        <div class="content">{$form.button_position.html}</div>
+        <div class="clear"></div>
+      </div>
+
     </fieldset>
 
     <div class="crm-submit-buttons">

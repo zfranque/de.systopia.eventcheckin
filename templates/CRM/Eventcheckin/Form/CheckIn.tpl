@@ -47,9 +47,11 @@
         </div>
       {/foreach}
 
-      <div class="crm-submit-buttons">
-        {include file="CRM/common/formButtons.tpl" location="bottom"}
-      </div>
+      {if $show_buttons_bottom}
+        <div class="crm-submit-buttons">
+          {include file="CRM/common/formButtons.tpl" location="bottom"}
+        </div>
+      {/if}
     {/if}
   </div>
 

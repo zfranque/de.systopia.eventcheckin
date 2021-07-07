@@ -46,10 +46,15 @@ class CRM_Eventcheckin_Form_CheckIn extends CRM_Core_Form
             }
             $this->addButtons($buttons);
 
-            // should we show the check-in buttons in top, too?
-            $show_top_buttons =    (count($checkin_data['checkin_options']) <= 2) // no more than two options
-                                && (count($checkin_data['values']) <= 5);         // no more than 5 fields
-            $this->assign('show_buttons_top', $show_top_buttons);
+            // add button position
+            $button_position = (int) Civi::settings()->get('event_button_position');
+            $this->assign('show_buttons_top', (int) (
+                   $button_position == CRM_Eventcheckin_Form_Settings::CHECKIN_BUTTONS_TOP
+                || $button_position == CRM_Eventcheckin_Form_Settings::CHECKIN_BUTTONS_TOP_AND_BOTTOM));
+            $this->assign('show_buttons_bottom', (int) (
+                   $button_position == CRM_Eventcheckin_Form_Settings::CHECKIN_BUTTONS_BOTTOM
+                || $button_position == CRM_Eventcheckin_Form_Settings::CHECKIN_BUTTONS_TOP_AND_BOTTOM
+                || $button_position == CRM_Eventcheckin_Form_Settings::CHECKIN_BUTTONS_UNDEFINED));
 
         } catch (CiviCRM_API3_Exception $ex) {
             $error_message = $ex->getMessage();

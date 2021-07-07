@@ -34,5 +34,8 @@
   <p>{ts}Here you can select the participant fields to be shown to the check-in user, in order to confirm the participant's identity.{/ts}</p>
 {/htxt}
 
+{htxt id='id-button-position'}
+  <p>{ts}Here you can configure where the check-in buttons should be on the check-in page.{/ts}</p>
+{/htxt}
 
 {/crmScope}

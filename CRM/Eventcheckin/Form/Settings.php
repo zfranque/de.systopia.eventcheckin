@@ -23,6 +23,11 @@ use CRM_Eventcheckin_ExtensionUtil as E;
  */
 class CRM_Eventcheckin_Form_Settings extends CRM_Core_Form
 {
+    const CHECKIN_BUTTONS_UNDEFINED      = 0;
+    const CHECKIN_BUTTONS_TOP            = 1;
+    const CHECKIN_BUTTONS_BOTTOM         = 2;
+    const CHECKIN_BUTTONS_TOP_AND_BOTTOM = 3;
+
     public function buildQuickForm()
     {
         // TOKEN SETTINGS
@@ -88,6 +93,20 @@ class CRM_Eventcheckin_Form_Settings extends CRM_Core_Form
                 'placeholder' => E::ts("none"),
             ]
         );
+        $this->add(
+            'select',
+            'button_position',
+            E::ts("Check-In Buttons"),
+            [
+                self::CHECKIN_BUTTONS_TOP => E::ts("On Top"),
+                self::CHECKIN_BUTTONS_BOTTOM => E::ts("At the Bottom"),
+                self::CHECKIN_BUTTONS_TOP_AND_BOTTOM => E::ts("Top and Bottom"),
+            ],
+            true,
+            [
+                'class' => 'crm-select2',
+            ]
+        );
 
 
         $this->setDefaults([
@@ -96,6 +115,7 @@ class CRM_Eventcheckin_Form_Settings extends CRM_Core_Form
            'checkin_status_list' => Civi::settings()->get('event_checkin_status_list'),
            'checked_in_status_list' => Civi::settings()->get('event_checked_in_status_list'),
            'verification_fields' => Civi::settings()->get('event_verification_fields'),
+           'button_position' => Civi::settings()->get('event_button_position'),
         ]);
 
         $this->addButtons(
@@ -118,6 +138,7 @@ class CRM_Eventcheckin_Form_Settings extends CRM_Core_Form
         Civi::settings()->set('event_checkin_status_list', $values['checkin_status_list']);
         Civi::settings()->set('event_checked_in_status_list', $values['checked_in_status_list']);
         Civi::settings()->set('event_verification_fields', $values['verification_fields']);
+        Civi::settings()->set('event_button_position', $values['button_position']);
 
         CRM_Core_Session::setStatus(
             E::ts("Settings Updated"),
