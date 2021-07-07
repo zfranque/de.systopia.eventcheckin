@@ -5,16 +5,16 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: de.systopia.eventcheckin\n"
-"POT-Creation-Date: 2021-07-06 10:43+0200\n"
+"POT-Creation-Date: 2021-07-07 18:27+0200\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
 "Language-Team: CiviCRM Translators <civicrm-translators@lists.civicrm.org>\n"
+"Language: de_DE\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: \n"
 "X-Generator: Poedit 2.0.6\n"
-"Last-Translator: \n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Language: de_DE\n"
 
 #: CRM/Eventcheckin/CheckinCode.php api/v3/EventCheckin/Confirm.php
 #: api/v3/EventCheckin/Verify.php
@@ -115,6 +115,22 @@ msgid "none"
 msgstr ""
 
 #: CRM/Eventcheckin/Form/Settings.php
+msgid "Check-In Buttons"
+msgstr "Check-In Buttons"
+
+#: CRM/Eventcheckin/Form/Settings.php
+msgid "On Top"
+msgstr "Oben"
+
+#: CRM/Eventcheckin/Form/Settings.php
+msgid "At the Bottom"
+msgstr "Unten"
+
+#: CRM/Eventcheckin/Form/Settings.php
+msgid "Top and Bottom"
+msgstr "Oben und Unten"
+
+#: CRM/Eventcheckin/Form/Settings.php
 msgid "Save"
 msgstr ""
 
@@ -195,7 +211,7 @@ msgstr ""
 
 #: api/v3/EventCheckin/Verify.php
 msgid "Permission denied"
-msgstr ""
+msgstr "Keine Berechtigung"
 
 #: api/v3/EventCheckin/Verify.php
 msgid "Participant [%1] doesn't exist (any more)."
@@ -227,6 +243,10 @@ msgstr "Teilnehmer Einchecken"
 #: eventcheckin.php
 msgid "RemoteContacts: Check-In Event Participants"
 msgstr ""
+
+#: templates/CRM/Eventcheckin/Form/CheckIn.tpl
+msgid "Participant information"
+msgstr "Informationen zum Teilnehmer"
 
 #: templates/CRM/Eventcheckin/Form/Settings.hlp
 msgid ""
@@ -274,6 +294,14 @@ msgstr ""
 "Hier können Sie Teilnehmer Informationen auswählen, die beim Check-In "
 "angezeigt werden. Mit deren Hilfe sollte es dann möglich sein, der/die "
 "TeilnehmerIn zu identifizieren, und den richtigen Status zu ermitteln."
+
+#: templates/CRM/Eventcheckin/Form/Settings.hlp
+msgid ""
+"Here you can configure where the check-in buttons should be on the check-in "
+"page."
+msgstr ""
+"Hier kann man konfigurieren, wo die Check-In Buttons auf der Check-In Seite "
+"sein sollen."
 
 #: templates/CRM/Eventcheckin/Form/Settings.tpl
 msgid "Token Settings"
