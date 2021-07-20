@@ -23,19 +23,19 @@ msgstr "Invalider Token"
 
 #: CRM/Eventcheckin/CheckinFields.php
 msgid "First Name"
-msgstr ""
+msgstr "Vorname"
 
 #: CRM/Eventcheckin/CheckinFields.php
 msgid "Last Name"
-msgstr ""
+msgstr "Nachname"
 
 #: CRM/Eventcheckin/CheckinFields.php
 msgid "Display Name"
-msgstr ""
+msgstr "Vollständiger Name"
 
 #: CRM/Eventcheckin/CheckinFields.php
 msgid "Preferred Language"
-msgstr ""
+msgstr "Bevorzugte Sprache"
 
 #: CRM/Eventcheckin/CheckinFields.php
 msgid "Contact Link"
@@ -51,15 +51,15 @@ msgstr "Teilnehmerrolle(n)"
 
 #: CRM/Eventcheckin/CheckinFields.php
 msgid "Event Title"
-msgstr ""
+msgstr "Veranstaltungstitel"
 
 #: CRM/Eventcheckin/CheckinFields.php
 msgid "Participant Status"
-msgstr ""
+msgstr "Status der Anmeldung"
 
 #: CRM/Eventcheckin/CheckinFields.php
 msgid "Registration Date"
-msgstr ""
+msgstr "Datum der Anmeldung"
 
 #: CRM/Eventcheckin/CheckinFields.php
 msgid "<a href=\"%1\" target=\"_blank\">%2 [%3]</a>"
@@ -112,7 +112,7 @@ msgstr "Teilnehmer Status: Check-In möglich"
 
 #: CRM/Eventcheckin/Form/Settings.php
 msgid "disabled"
-msgstr ""
+msgstr "deaktiviert"
 
 #: CRM/Eventcheckin/Form/Settings.php
 msgid "Checked-In Status"
@@ -124,7 +124,7 @@ msgstr "Anzeige-Felder für die Verifizierung des Teilnehmers"
 
 #: CRM/Eventcheckin/Form/Settings.php
 msgid "none"
-msgstr ""
+msgstr "keine"
 
 #: CRM/Eventcheckin/Form/Settings.php
 msgid "Check-In Buttons"
@@ -144,7 +144,7 @@ msgstr "Oben und Unten"
 
 #: CRM/Eventcheckin/Form/Settings.php
 msgid "Save"
-msgstr ""
+msgstr "Speichern"
 
 #: CRM/Eventcheckin/Form/Settings.php
 msgid "Settings Updated"
@@ -152,7 +152,7 @@ msgstr "Settings Aktualisiert"
 
 #: CRM/Eventcheckin/Form/Settings.php
 msgid "Success"
-msgstr ""
+msgstr "Erfolg"
 
 #: CRM/Eventcheckin/Tokens.php
 msgid "Check-In Token"
