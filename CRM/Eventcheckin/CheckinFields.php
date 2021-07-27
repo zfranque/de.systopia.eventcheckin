@@ -209,14 +209,14 @@ class CRM_Eventcheckin_CheckinFields
         switch (strtolower($field_spec['name'])) {
             case 'display_name_link':
                 return E::ts('<a href="%1" target="_blank">%2 [%3]</a>', [
-                    1 => CRM_Utils_System::url('civicrm/contact/view', "reset=1&cid={$entity_data['id']}"),
+                    1 => CRM_Utils_System::url('civicrm/contact/view', "reset=1&cid={$entity_data['id']}", true),
                     2 => $entity_data['display_name'],
                     3 => $entity_data['id'],
                 ]);
 
             case 'participant_link':
                 return E::ts('<a href="%1" target="_blank" class="crm-popup small-popup">%2 [%3]</a>', [
-                    1 => CRM_Utils_System::url('civicrm/contact/view/participant', "reset=1&id={$entity_data['id']}&cid={$entity_data['contact_id']}&action=view"),
+                    1 => CRM_Utils_System::url('civicrm/contact/view/participant', "reset=1&id={$entity_data['id']}&cid={$entity_data['contact_id']}&action=view", true),
                     2 => $entity_data['display_name'],
                     3 => $entity_data['id'],
                 ]);
