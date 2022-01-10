@@ -1,0 +1,30 @@
+site_name: Event Check-In
+repo_url: https://github.com/systopia/de.systopia.eventcheckin
+site_description: 'A guide for the Event Check-IN extension.'
+site_author: 'SYSTOPIA'
+theme:
+  name:
+    material
+
+nav:
+  - Home: index.md
+  - Installation and Technical Information: installation-technical-information.md
+  - Configuration: configuration.md
+
+markdown_extensions:
+  - attr_list
+  - admonition
+  - def_list
+  - pymdownx.highlight:
+      guess_lang: false
+  - toc:
+      permalink: true
+  - pymdownx.superfences
+  - pymdownx.inlinehilite
+  - pymdownx.tilde
+  - pymdownx.betterem
+  - pymdownx.mark
+
+plugins:
+  - search:
+      lang: en
